@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="jquery-3.3.1.min.js"></script>
+  <link data-require="bootstrap@4.1.1" data-semver="4.1.1" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+
+ <script src="highlight.min.js"></script> 
+
+  <link rel="stylesheet" href="theme/default.css" />
+  <script src="debounce.js"></script>
+  <script src="script.js"></script>
+
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-9">
+        <div class="form-group">
+          <label for="code">Example textarea</label>
+          <textarea class="form-control" rows="3" id="code"></textarea>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="language">Language</label>
+          <select class="form-control" id="language">
+            <option>java</option>
+            <option>js</option>
+          </select>
+        </div>
+        
+
+
+      </div>
+
+    </div>
+   
+    <pre>
+      <code id="formattedCode" class="java">
+      
+      </code>
+    </pre>
+
+
+  </div>
+
+</body>
+
+</html>
