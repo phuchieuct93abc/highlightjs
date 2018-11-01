@@ -25,7 +25,6 @@ function runHightlight(){
 
   },1000)
 }
-alert("cho hung")
 function copyToClipboard(str) {
   var el = document.createElement('textarea');
   el.value = str;
