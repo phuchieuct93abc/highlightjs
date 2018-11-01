@@ -2,26 +2,42 @@
 $(function() {
 
   $('#code').on('keyup', function() {
-    $("#formattedCode").html($(this).val())
-    runHightlight();
+    debounce(function(){
+      $("#formattedCode").html($(this).val())
+      $("#formattedCode").removeClass()
+      runHightlight();
+
+    },1000)
+
   });
-  enableTabTextArea();
 
-  $("#language").on("change",function(){
-    $("#formattedCode").removeClass();
-    $("#formattedCode").addClass($(this).val())
-    runHightlight();
+  var quill = enableQuill();
+  quill.on('text-change', function(delta, oldDelta, source) {
+    $("#formattedCode").removeClass()
+    $("#formattedCode").html(js_beautify(quill.getText()))
+    debounce(function(){
 
-  })
+      runHightlight();
 
-
-  $("#language").val($("#language option:first").val());
-
+    },1000)()
+    
+  });
 
 })
+
+var inDebounce
+
+const debounce = (func, delay) => {
+  return function() {
+    const context = this
+    const args = arguments
+    clearTimeout(inDebounce)
+    inDebounce = setTimeout(() => func.apply(context, args), delay)
+  }
+}
 function runHightlight(){
   setTimeout(function(){
-    hljs.highlightBlock($("#formattedCode")[0]);
+      hljs.highlightBlock($("#formattedCode")[0]);
 
   },1000)
 }
@@ -36,27 +52,35 @@ function copyToClipboard(str) {
   document.execCommand('copy');
   document.body.removeChild(el);
 };
-function enableTabTextArea(){
-  $("textarea").keydown(function(e) {
-    if(e.keyCode === 9) { // tab was pressed
-        // get caret position/selection
-        var start = this.selectionStart;
-            end = this.selectionEnd;
-  
-        var $this = $(this);
-  
-        // set textarea value to: text before caret + tab + text after caret
-        $this.val($this.val().substring(0, start)
-                    + "\t"
-                    + $this.val().substring(end));
-  
-        // put caret at right position again
-        this.selectionStart = this.selectionEnd = start + 1;
-  
-        // prevent the focus lose
-        return false;
-    }
+function enableQuill(){
+  return new Quill('#editor-container', {
+    modules: {
+    
+    },
+    placeholder: 'Paste code here',
+    theme: 'snow'  // or 'bubble'
   });
 }
 
 
+
+function CopyHTMLToClipboard() {    
+  if (document.body.createControlRange) {
+      var htmlContent = document.getElementById('pre');
+      var controlRange;
+
+      var range = document.body.createTextRange();
+      range.moveToElementText(htmlContent);
+
+      //Uncomment the next line if you don't want the text in the div to be selected
+      range.select();
+
+      controlRange = document.body.createControlRange();
+      controlRange.addElement(htmlContent);
+
+      //This line will copy the formatted text to the clipboard
+      controlRange.execCommand('Copy');         
+
+      alert('Your HTML has been copied\n\r\n\rGo to Word and press Ctrl+V');
+  }
+}    

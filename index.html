@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="theme/default.css" />
   <script src="debounce.js"></script>
   <script src="script.js"></script>
+  <script src="quill.min.js"></script>
+  <link href="quill.snow.css" rel="stylesheet">
+  <script src="beautify.js"></script>
+  
 
 
 </head>
@@ -22,16 +26,18 @@
       <div class="col-9">
         <div class="form-group">
           <label for="code">Example textarea</label>
-          <textarea class="form-control" rows="3" id="code"></textarea>
+          <div id="editor-container" style=" height: 375px;">
+          </div>
+          <!-- <textarea class="form-control" rows="3" id="code"></textarea> -->
         </div>
       </div>
       <div class="col-3">
         <div class="form-group">
-          <label for="language">Language</label>
-          <select class="form-control" id="language">
+         
+          <!-- <select class="form-control" id="language">
             <option>java</option>
             <option>js</option>
-          </select>
+          </select> -->
         </div>
         
 
@@ -41,7 +47,7 @@
     </div>
    
     <pre>
-      <code id="formattedCode" class="java">
+      <code id="formattedCode" >
       
       </code>
     </pre>
