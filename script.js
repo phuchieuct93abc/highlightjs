@@ -13,13 +13,13 @@ $(function() {
 
   var quill = enableQuill();
   quill.on('text-change', function(delta, oldDelta, source) {
-    $("#formattedCode").removeClass()
-    $("#formattedCode").html(js_beautify(quill.getText()))
-    debounce(function(){
 
+    debounce(function(){
+      $("#formattedCode").removeClass()
+      $("#formattedCode").html(js_beautify(quill.getText()))
       runHightlight();
 
-    },1000)()
+    },500)()
     
   });
 

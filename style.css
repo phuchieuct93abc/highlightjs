@@ -3,3 +3,10 @@
 .hljs{
   background-color:initial !important;
 }
+.ql-toolbar{
+  display: none;
+}
+html code{
+  font-family: monospace !important;
+  font-size: 15px !important;
+}
